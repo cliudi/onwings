@@ -320,30 +320,55 @@ select.querySelectorAll('[data-value]').forEach(o=>{
 document.onclick=e=>{
   if(!select.contains(e.target))select.classList.remove('open');
 
-/* FORM */
-form.onsubmit=e=>{
+const TELEGRAM_TOKEN = "8568134478:AAEicxCBw4WPDb0dfDn4RvVZXCsmtTNidxM";
+const CHAT_ID = "971348660";
+
+form.onsubmit = async (e) => {
   e.preventDefault();
-  let ok=true;
+  let ok = true;
 
-  if(name.value.trim()===''){
-    errName.classList.add('show');name.classList.add('error');ok=false
-  }else{errName.classList.remove('show');name.classList.remove('error')}
-
-  if(phone.value.trim()===''){
-    errPhone.classList.add('show');phone.classList.add('error');ok=false
-  }else{errPhone.classList.remove('show');phone.classList.remove('error')}
-
-  if(!formatHidden.value){
-    errFormat.classList.add('show');ok=false
-  }else errFormat.classList.remove('show');
-
-  if(ok){
-    toast.classList.add('show');
-    setTimeout(()=>toast.classList.remove('show'),3000);
-    form.reset();
-    selectText.textContent='Формат работы';
+  if (name.value.trim() === '') {
+    errName.classList.add('show'); name.classList.add('error'); ok = false;
+  } else {
+    errName.classList.remove('show'); name.classList.remove('error');
   }
-}}
+
+  if (phone.value.trim() === '') {
+    errPhone.classList.add('show'); phone.classList.add('error'); ok = false;
+  } else {
+    errPhone.classList.remove('show'); phone.classList.remove('error');
+  }
+
+  if (!formatHidden.value) {
+    errFormat.classList.add('show'); ok = false;
+  } else {
+    errFormat.classList.remove('show');
+  }
+
+  if (!ok) return;
+
+  const message = `
+📝 *Новая заявка*
+👤 Имя: ${name.value}
+📞 Телефон: ${phone.value}
+📌 Формат: ${selectText.textContent}
+  `;
+
+  await fetch(`https://api.telegram.org/bot${TELEGRAM_TOKEN}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: CHAT_ID,
+      text: message,
+      parse_mode: "Markdown"
+    })
+  });
+
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 3000);
+  form.reset();
+  selectText.textContent = 'Формат работы';
+}};
 </script>
 
 </body>
