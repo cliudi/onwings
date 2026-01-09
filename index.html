@@ -387,6 +387,17 @@ form.onsubmit = async (e) => {
       text: message
     })
   });
+  // ✅ показать кастомное уведомление
+toast.classList.add('show');
+
+// ⏱ скрыть через 3 секунды
+setTimeout(() => toast.classList.remove('show'), 3000);
+
+// 🧹 очистить форму
+form.reset();
+formatHidden.value = '';
+selectText.textContent = 'Формат работы';
+
 
   toast.classList.add('show');
   setTimeout(() => toast.classList.remove('show'), 3000);
