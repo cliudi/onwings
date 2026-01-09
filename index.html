@@ -301,12 +301,25 @@ section{
 <div class="toast" id="toast">Заявка отправлена ✅</div>
 
 <script>
+/* GET ELEMENTS */
+const form = document.getElementById('form');
+const name = document.getElementById('name');
+const phone = document.getElementById('phone');
+const errName = document.getElementById('errName');
+const errPhone = document.getElementById('errPhone');
+const errFormat = document.getElementById('errFormat');
+const select = document.getElementById('select');
+const selectText = document.getElementById('selectText');
+const formatHidden = document.getElementById('formatHidden');
+const toast = document.getElementById('toast');
+
 /* PHONE */
 phone.oninput = () => {
   let v = phone.value.replace(/[^\d+]/g, '');
   if (v.includes('+')) v = '+' + v.replace(/\+/g, '');
   phone.value = v;
 };
+
 
 /* SELECT */
 selectText.onclick = () => select.classList.toggle('open');
@@ -324,7 +337,7 @@ document.onclick = e => {
 };
 
 /* TELEGRAM */
-const TELEGRAM_TOKEN = "ВСТАВЬ_НОВЫЙ_ТОКЕН";
+const TELEGRAM_TOKEN = "8568134478:AAGkqzyQ9EiuNjn_8PfvZ4dJgyVM9ulzK1I";
 const CHAT_ID = "971348660";
 
 /* FORM */
