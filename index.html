@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Психология — Главная</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --overlay: rgba(11,16,32,0.65);
+      --card: rgba(255,255,255,0.12);
+      --primary: #7c3aed;
+      --secondary: #22d3ee;
+      --accent: #10b981;
+      --text: #ffffff;
+      --muted: #cbd5e1;
+      --glass: rgba(255,255,255,0.18);
+      --border: rgba(255,255,255,0.25);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--text);
+      background: #000;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2000&auto=format&fit=crop');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .overlay { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.35) 60%, rgba(0,0,0,0.2) 100%); }
+
+    header {
+      position: relative;
+      z-index: 3;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 24px 20px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo { font-weight: 900; letter-spacing: 1px; color: var(--secondary); }
+
+    nav a { margin-left: 20px; color: var(--muted); font-weight: 500; }
+    nav a:hover { color: #fff; }
+
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 32px;
+      align-items: stretch;
+    }
+
+    /* LEFT HERO */
+    .left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 32px 12px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(16,185,129,0.15);
+      color: #6ee7b7;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      width: fit-content;
+      border: 1px solid rgba(110,231,183,0.35);
+    }
+
+    .left h1 {
+      font-size: 3rem;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      font-weight: 800;
+    }
+
+    .left p { color: var(--muted); max-width: 520px; margin-bottom: 24px; }
+
+    .progress-wrap { margin-top: 16px; max-width: 360px; }
+    .progress-label { font-size: 0.9rem; color: var(--muted); margin-bottom: 8px; }
+    .progress {
+      width: 100%;
+      height: 12px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.25);
+    }
+    .progress-bar {
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--accent), var(--secondary));
+      border-radius: 999px;
+      transition: width .3s ease;
+    }
+
+    /* RIGHT FORM */
+    .card {
+      backdrop-filter: blur(12px);
+      background: var(--glass);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .form-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 4px; }
+
+    .field {
+      width: 100%;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.85);
+      color: #0f172a;
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    .field::placeholder { color: #64748b; }
+
+    .select { appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="%230f172a"><path d="M7 10l5 5 5-5z"/></svg>'); background-repeat: no-repeat; background-position: right 12px center; background-size: 18px; }
+
+    .radio-group { display: grid; grid-template-columns: 1fr; gap: 10px; margin-top: 6px; }
+    .radio {
+      display: flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,0.85);
+      padding: 10px 12px; border-radius: 12px; color: #0f172a;
+      border: 1px solid rgba(15,23,42,0.1);
+    }
+
+    .radio input { accent-color: #10b981; }
+
+    .btn {
+      margin-top: 10px;
+      padding: 14px 18px;
+      border-radius: 14px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      color: #ffffff;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transition: transform .15s ease, box-shadow .15s ease;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    }
+
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 14px 30px rgba(0,0,0,0.45); }
+
+    .note { font-size: 0.8rem; color: #e5e7eb; opacity: 0.8; }
+
+    /* SECTIONS BELOW */
+    section { padding: 80px 20px; background: #0b1020; }
+    .section-inner { max-width: 1200px; margin: 0 auto; }
+    .section-title { font-size: 2rem; margin-bottom: 32px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+
+    .info-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 20px;
+      padding: 24px;
+      min-height: 180px;
+    }
+
+    footer { background: #020617; padding: 40px 20px; text-align: center; color: #94a3b8; }
+
+    @media (max-width: 900px) {
+      .container { grid-template-columns: 1fr; padding-top: 20px; }
+      .left h1 { font-size: 2.2rem; }
+      nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page" id="top">
+    <div class="overlay"></div>
+
+    <header>
+      <div class="logo">НА КРЫЛЬЯХ</div>
+      <nav>
+        <a href="#about">О проекте</a>
+        <a href="#services">Услуги</a>
+        <a href="#content">Контент</a>
+        <a href="#contact">Контакты</a>
+      </nav>
+    </header>
+
+    <div class="container">
+      <!-- LEFT HERO -->
+      <div class="left">
+        <span class="badge">Только для участников</span>
+        <h1>Психология роста и внутренней устойчивости</h1>
+        <p>
+          Здесь будет твой продающий текст. Коротко: для кого, какая боль, какой результат. Без воды.
+        </p>
+
+        <div class="progress-wrap">
+          <div class="progress-label">Осталось мест: 7 из 20</div>
+          <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT FORM -->
+      <form class="card" id="regForm">
+        <div class="form-title">Записаться на консультацию</div>
+
+        <input type="text" class="field" placeholder="Имя" name="name" required />
+        <input type="tel" class="field" placeholder="+998 00 000 00 00" name="phone" required />
+
+        <select class="field select" name="format" required>
+          <option value="">Формат работы</option>
+          <option value="individual">Индивидуально</option>
+          <option value="group">Группа</option>
+          <option value="online">Онлайн</option>
+        </select>
+
+        <input type="text" class="field" placeholder="В какой сфере сейчас основные сложности?" name="sphere" />
+
+        <div>
+          <div style="font-weight:600; margin-bottom:6px; color:#0f172a;">Ваш опыт с психологией</div>
+          <div class="radio-group">
+            <label class="radio"><input type="radio" name="exp" value="none" /> Никогда не обращался</label>
+            <label class="radio"><input type="radio" name="exp" value="once" /> Был опыт</label>
+            <label class="radio"><input type="radio" name="exp" value="regular" /> Работаю регулярно</label>
+          </div>
+        </div>
+
+        <textarea class="field" rows="3" placeholder="Коротко: с каким запросом приходите?" name="goal"></textarea>
+
+        <button type="submit" class="btn">Отправить заявку</button>
+        <div class="note">Нажимая кнопку, вы соглашаетесь на обработку данных</div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <h2 class="section-title">О проекте</h2>
+      <div class="grid">
+        <div class="info-card">Тут будет текст о миссии, подходе, ценностях</div>
+        <div class="info-card">Тут будет текст о методах работы</div>
+        <div class="info-card">Тут будет текст о результатах клиентов</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="section-inner">
+      <h2 class="section-title">Услуги</h2>
+      <div class="grid">
+        <div class="info-card">Индивидуальные консультации</div>
+        <div class="info-card">Групповые программы</div>
+        <div class="info-card">Онлайн сопровождение</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTENT -->
+  <section id="content">
+    <div class="section-inner">
+      <h2 class="section-title">Видео и материалы</h2>
+      <div class="grid">
+        <div class="info-card">Место для видео</div>
+        <div class="info-card">Место для видео</div>
+        <div class="info-card">Место для статьи / поста</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="section-inner">
+      <h2 class="section-title">Контакты</h2>
+      <div class="grid">
+        <div class="info-card">Телефон, Telegram, Instagram</div>
+        <div class="info-card">Адрес / Онлайн формат</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 НА КРЫЛЬЯХ. Все права защищены.
+  </footer>
+
+  <script>
+    // Прогресс-бар
+    const total = 20;
+    let left = 7;
+    const percent = ((total - left) / total) * 100;
+    document.getElementById('progressBar').style.width = percent + '%';
+
+    // Форма
+    document.getElementById('regForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(this).entries());
+      console.log('Заявка:', data);
+      alert('Заявка отправлена!');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
