@@ -7,6 +7,7 @@
 
   <style>
     :root {
+      --bg: #0b1020;
       --primary: #7c3aed;
       --secondary: #22d3ee;
       --accent: #10b981;
@@ -22,8 +23,9 @@
       font-family: Inter, system-ui, sans-serif;
       background: #000;
       color: var(--text);
-      min-height: 100vh;
     }
+
+    a { color: inherit; text-decoration: none; }
 
     .page {
       min-height: 100vh;
@@ -59,7 +61,6 @@
     nav a {
       margin-left: 20px;
       color: var(--muted);
-      text-decoration: none;
     }
 
     nav a:hover { color: #fff; }
@@ -128,6 +129,7 @@
       font-size: .95rem;
       outline: none;
       background: rgba(255,255,255,.9);
+      color: #0f172a;
     }
 
     .select {
@@ -137,10 +139,7 @@
       background-position: right 12px center;
     }
 
-    .radio-group {
-      display: grid;
-      gap: 10px;
-    }
+    .radio-group { display: grid; gap: 10px; }
 
     .radio {
       display: flex;
@@ -167,6 +166,36 @@
     .note {
       font-size: .8rem;
       opacity: .8;
+    }
+
+    /* SECTIONS */
+    section {
+      padding: 80px 20px;
+      background: var(--bg);
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 32px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .info-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 20px;
+      padding: 24px;
+      min-height: 180px;
     }
 
     footer {
@@ -245,6 +274,7 @@
 </head>
 
 <body>
+
 <div class="page">
   <div class="overlay"></div>
 
@@ -253,6 +283,7 @@
     <nav>
       <a href="#about">О проекте</a>
       <a href="#services">Услуги</a>
+      <a href="#content">Контент</a>
       <a href="#contact">Контакты</a>
     </nav>
   </header>
@@ -262,8 +293,8 @@
       <span class="badge">Психология роста</span>
       <h1>Внутренняя устойчивость и развитие</h1>
       <p>
-        Помогаю обрести опору, ясность и уверенность.
-        Работаем глубоко и без лишней теории.
+        Здесь будет твой продающий текст. Коротко: для кого,
+        какая боль и какой результат.
       </p>
     </div>
 
@@ -293,6 +324,49 @@
     </form>
   </div>
 </div>
+
+<section id="about">
+  <div class="section-inner">
+    <h2 class="section-title">О проекте</h2>
+    <div class="grid">
+      <div class="info-card">Тут будет текст о миссии и ценностях</div>
+      <div class="info-card">Тут будет текст о подходе и методах</div>
+      <div class="info-card">Тут будут результаты клиентов</div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="section-inner">
+    <h2 class="section-title">Услуги</h2>
+    <div class="grid">
+      <div class="info-card">Индивидуальные консультации</div>
+      <div class="info-card">Групповые программы</div>
+      <div class="info-card">Онлайн сопровождение</div>
+    </div>
+  </div>
+</section>
+
+<section id="content">
+  <div class="section-inner">
+    <h2 class="section-title">Видео и материалы</h2>
+    <div class="grid">
+      <div class="info-card">Место для видео</div>
+      <div class="info-card">Место для видео</div>
+      <div class="info-card">Место для статьи / поста</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-inner">
+    <h2 class="section-title">Контакты</h2>
+    <div class="grid">
+      <div class="info-card">Телефон / Telegram / Instagram</div>
+      <div class="info-card">Онлайн формат / Адрес</div>
+    </div>
+  </div>
+</section>
 
 <footer>
   © 2026 НА КРЫЛЬЯХ
