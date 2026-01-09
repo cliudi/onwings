@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>НА КРЫЛЬЯХ</title>
 
 <style>
-:root {
+:root{
   --bg:#0b1020;
   --glass:rgba(255,255,255,.18);
   --border:rgba(255,255,255,.25);
@@ -33,7 +33,8 @@ body{
   position:relative
 }
 .overlay{
-  position:absolute;inset:0;
+  position:absolute;
+  inset:0;
   background:linear-gradient(90deg,rgba(0,0,0,.7),rgba(0,0,0,.35))
 }
 
@@ -41,8 +42,6 @@ header{
   max-width:1200px;
   margin:auto;
   padding:24px 20px;
-  display:flex;
-  justify-content:space-between;
   position:relative;
   z-index:2
 }
@@ -51,8 +50,8 @@ header{
   color:var(--secondary);
   text-decoration:none;
 }
-.logo:hover{opacity:.8}
 
+/* LAYOUT */
 .container{
   max-width:1200px;
   margin:auto;
@@ -75,9 +74,10 @@ header{
   padding:24px;
   display:flex;
   flex-direction:column;
-  gap:14px
+  gap:10px
 }
 
+/* INPUTS */
 .field{
   padding:14px 16px;
   border-radius:14px;
@@ -86,7 +86,16 @@ header{
   font-size:.95rem;
   color:#0f172a
 }
+.field.error{border-color:var(--error)}
 
+.error-text{
+  font-size:.75rem;
+  color:var(--error);
+  display:none
+}
+.error-text.show{display:block}
+
+/* BUTTON */
 .btn{
   padding:14px;
   border-radius:14px;
@@ -106,15 +115,14 @@ header{
   color:#0f172a;
   cursor:pointer;
   display:flex;
-  justify-content:space-between;
-  align-items:center
+  justify-content:space-between
 }
 .select-display::after{content:"▾";opacity:.6}
+
 .select-options{
   position:absolute;
   top:110%;left:0;right:0;
   background:#020617;
-  border:1px solid rgba(255,255,255,.15);
   border-radius:16px;
   display:none;
   overflow:hidden;
@@ -134,57 +142,50 @@ section{
   padding:80px 20px;
   background:var(--bg)
 }
-.section-inner{
-  max-width:1200px;
-  margin:auto
-}
+.section-inner{max-width:1200px;margin:auto}
 .section-title{
   font-size:2rem;
   margin-bottom:32px
 }
+
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:24px
 }
-
 .info-card{
   padding:24px;
   border-radius:20px;
   background:rgba(255,255,255,.06);
-  border:1px solid rgba(255,255,255,.15);
-  min-height:180px
+  border:1px solid rgba(255,255,255,.15)
 }
 
-/* MEDIA BLOCKS */
-.media{
-  aspect-ratio:16/9;
-  border-radius:16px;
-  background:rgba(255,255,255,.08);
+/* SOCIAL */
+.socials{
+  display:flex;
+  gap:16px;
+  margin-top:12px
+}
+.socials a{
+  width:44px;height:44px;
+  border-radius:50%;
+  background:rgba(255,255,255,.1);
   display:flex;
   align-items:center;
-  justify-content:center;
-  color:var(--muted);
-  font-size:.9rem
+  justify-content:center
 }
 
-/* CONTACT */
-.contact-item{
-  display:flex;
-  flex-direction:column;
-  gap:8px
-}
-.contact-item span{
-  color:var(--muted);
-  font-size:.85rem
-}
-
-footer{
+/* TOAST */
+.toast{
+  position:fixed;
+  bottom:30px;
+  right:30px;
   background:#020617;
-  text-align:center;
-  padding:40px;
-  color:#94a3b8
+  padding:16px 22px;
+  border-radius:14px;
+  display:none
 }
+.toast.show{display:block}
 
 @media(max-width:900px){
   .container{grid-template-columns:1fr}
@@ -195,35 +196,37 @@ footer{
 
 <body>
 
-<!-- HERO -->
 <div class="page">
 <div class="overlay"></div>
 
 <header>
-  <!-- ССЫЛКА ВЕРНЁТ НА https://cliudi.github.io/onwings/ -->
   <a href="https://cliudi.github.io/onwings/" class="logo">НА КРЫЛЬЯХ</a>
 </header>
 
 <div class="container">
   <div class="left">
     <h1>Психология роста</h1>
-    <p>Помогаю найти опору, ясность и движение вперёд</p>
+    <p>Сообщество развития, поддержки и осознанности</p>
   </div>
 
-  <form class="card">
-    <input class="field" placeholder="Имя">
-    <input class="field" placeholder="+998 90 123 45 67">
+  <form class="card" id="form">
+    <input class="field" id="name" placeholder="Имя">
+    <div class="error-text" id="errName">Введите имя</div>
 
-    <select hidden></select>
+    <input class="field" id="phone" placeholder="+998901234567">
+    <div class="error-text" id="errPhone">Введите номер телефона</div>
 
-    <div class="select-wrap" id="customSelect">
-      <div class="select-display" id="selectDisplay">Формат работы</div>
+    <select id="formatHidden" hidden></select>
+
+    <div class="select-wrap" id="select">
+      <div class="select-display" id="selectText">Формат работы</div>
       <div class="select-options">
         <div data-value="individual">Индивидуально</div>
         <div data-value="group">Группа</div>
         <div data-value="online">Онлайн</div>
       </div>
     </div>
+    <div class="error-text" id="errFormat">Выберите формат</div>
 
     <button class="btn">Отправить заявку</button>
   </form>
@@ -231,62 +234,92 @@ footer{
 </div>
 
 <!-- ABOUT -->
-<section id="about">
+<section>
   <div class="section-inner">
-    <h2 class="section-title">О проекте</h2>
+    <h2 class="section-title">О нас</h2>
     <div class="grid">
-      <div class="info-card">
-        Здесь текст о тебе: опыт, подход, философия работы.
-      </div>
-      <div class="info-card">
-        Место для фото (портрет, процесс, атмосфера).
-      </div>
+      <div class="info-card">Мы — проект про рост, психологию и поддержку.</div>
+      <div class="info-card">Здесь может быть фото команды или пространства.</div>
     </div>
   </div>
 </section>
 
 <!-- MEDIA -->
-<section id="media">
+<section>
   <div class="section-inner">
-    <h2 class="section-title">Фото и видео</h2>
+    <h2 class="section-title">Видео и материалы</h2>
     <div class="grid">
-      <div class="media">Видео / YouTube</div>
-      <div class="media">Фото</div>
-      <div class="media">Видео / Reels</div>
+      <div class="info-card">Видео выступления</div>
+      <div class="info-card">Фото мероприятий</div>
+      <div class="info-card">Полезный контент</div>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section>
   <div class="section-inner">
     <h2 class="section-title">Контакты</h2>
-    <div class="grid">
-      <div class="info-card contact-item">
-        <strong>Telegram</strong>
-        <span>@your_username</span>
-      </div>
-      <div class="info-card contact-item">
-        <strong>Социальные сети</strong>
-        <span>Instagram / YouTube / TikTok</span>
-      </div>
-      <div class="info-card contact-item">
-        <strong>Формат</strong>
-        <span>Онлайн и офлайн консультации</span>
+    <div class="info-card">
+      <div class="socials">
+        <a href="#">TG</a>
+        <a href="#">IG</a>
+        <a href="#">YT</a>
       </div>
     </div>
   </div>
 </section>
 
-<footer>© 2026 НА КРЫЛЬЯХ</footer>
+<footer style="text-align:center;padding:40px;color:#94a3b8;background:#020617">
+© 2026 НА КРЫЛЬЯХ
+</footer>
+
+<div class="toast" id="toast">Заявка отправлена ✅</div>
 
 <script>
-const wrap=document.getElementById('customSelect');
-const display=document.getElementById('selectDisplay');
-display.onclick=()=>wrap.classList.toggle('open');
-document.addEventListener('click',e=>{
-  if(!wrap.contains(e.target))wrap.classList.remove('open');
+/* PHONE */
+phone.oninput=()=>{
+  let v=phone.value.replace(/[^\d+]/g,'');
+  if(v.includes('+'))v='+'+v.replace(/\+/g,'');
+  phone.value=v;
+}
+
+/* SELECT */
+selectText.onclick=()=>select.classList.toggle('open');
+select.querySelectorAll('[data-value]').forEach(o=>{
+  o.onclick=()=>{
+    selectText.textContent=o.textContent;
+    formatHidden.value=o.dataset.value;
+    select.classList.remove('open');
+  }
 });
+document.onclick=e=>{
+  if(!select.contains(e.target))select.classList.remove('open');
+
+/* FORM */
+form.onsubmit=e=>{
+  e.preventDefault();
+  let ok=true;
+
+  if(name.value.trim()===''){
+    errName.classList.add('show');name.classList.add('error');ok=false
+  }else{errName.classList.remove('show');name.classList.remove('error')}
+
+  if(phone.value.trim()===''){
+    errPhone.classList.add('show');phone.classList.add('error');ok=false
+  }else{errPhone.classList.remove('show');phone.classList.remove('error')}
+
+  if(!formatHidden.value){
+    errFormat.classList.add('show');ok=false
+  }else errFormat.classList.remove('show');
+
+  if(ok){
+    toast.classList.add('show');
+    setTimeout(()=>toast.classList.remove('show'),3000);
+    form.reset();
+    selectText.textContent='Формат работы';
+  }
+}}
 </script>
 
 </body>
