@@ -46,7 +46,12 @@ header{
   position:relative;
   z-index:2
 }
-.logo{font-weight:900;color:var(--secondary)}
+.logo{
+  font-weight:900;
+  color:var(--secondary);
+  text-decoration:none;
+}
+.logo:hover{opacity:.8}
 
 .container{
   max-width:1200px;
@@ -195,7 +200,8 @@ footer{
 <div class="overlay"></div>
 
 <header>
-  <a href="index.html" class="logo">НА КРЫЛЬЯХ</a>
+  <!-- ССЫЛКА ВЕРНЁТ НА https://cliudi.github.io/onwings/ -->
+  <a href="https://cliudi.github.io/onwings/" class="logo">НА КРЫЛЬЯХ</a>
 </header>
 
 <div class="container">
@@ -213,9 +219,9 @@ footer{
     <div class="select-wrap" id="customSelect">
       <div class="select-display" id="selectDisplay">Формат работы</div>
       <div class="select-options">
-        <div>Индивидуально</div>
-        <div>Группа</div>
-        <div>Онлайн</div>
+        <div data-value="individual">Индивидуально</div>
+        <div data-value="group">Группа</div>
+        <div data-value="online">Онлайн</div>
       </div>
     </div>
 
