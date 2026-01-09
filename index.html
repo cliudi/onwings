@@ -302,45 +302,57 @@ section{
 
 <script>
 /* PHONE */
-phone.oninput=()=>{
-  let v=phone.value.replace(/[^\d+]/g,'');
-  if(v.includes('+'))v='+'+v.replace(/\+/g,'');
-  phone.value=v;
-}
+phone.oninput = () => {
+  let v = phone.value.replace(/[^\d+]/g, '');
+  if (v.includes('+')) v = '+' + v.replace(/\+/g, '');
+  phone.value = v;
+};
 
 /* SELECT */
-selectText.onclick=()=>select.classList.toggle('open');
-select.querySelectorAll('[data-value]').forEach(o=>{
-  o.onclick=()=>{
-    selectText.textContent=o.textContent;
-    formatHidden.value=o.dataset.value;
-    select.classList.remove('open');
-  }
-});
-document.onclick=e=>{
-  if(!select.contains(e.target))select.classList.remove('open');
+selectText.onclick = () => select.classList.toggle('open');
 
-const TELEGRAM_TOKEN = "8568134478:AAEicxCBw4WPDb0dfDn4RvVZXCsmtTNidxM";
+select.querySelectorAll('[data-value]').forEach(o => {
+  o.onclick = () => {
+    selectText.textContent = o.textContent;
+    formatHidden.value = o.dataset.value;
+    select.classList.remove('open');
+  };
+});
+
+document.onclick = e => {
+  if (!select.contains(e.target)) select.classList.remove('open');
+};
+
+/* TELEGRAM */
+const TELEGRAM_TOKEN = "ВСТАВЬ_НОВЫЙ_ТОКЕН";
 const CHAT_ID = "971348660";
 
+/* FORM */
 form.onsubmit = async (e) => {
   e.preventDefault();
   let ok = true;
 
   if (name.value.trim() === '') {
-    errName.classList.add('show'); name.classList.add('error'); ok = false;
+    errName.classList.add('show');
+    name.classList.add('error');
+    ok = false;
   } else {
-    errName.classList.remove('show'); name.classList.remove('error');
+    errName.classList.remove('show');
+    name.classList.remove('error');
   }
 
   if (phone.value.trim() === '') {
-    errPhone.classList.add('show'); phone.classList.add('error'); ok = false;
+    errPhone.classList.add('show');
+    phone.classList.add('error');
+    ok = false;
   } else {
-    errPhone.classList.remove('show'); phone.classList.remove('error');
+    errPhone.classList.remove('show');
+    phone.classList.remove('error');
   }
 
   if (!formatHidden.value) {
-    errFormat.classList.add('show'); ok = false;
+    errFormat.classList.add('show');
+    ok = false;
   } else {
     errFormat.classList.remove('show');
   }
@@ -348,7 +360,7 @@ form.onsubmit = async (e) => {
   if (!ok) return;
 
   const message = `
-📝 *Новая заявка*
+📝 Новая заявка
 👤 Имя: ${name.value}
 📞 Телефон: ${phone.value}
 📌 Формат: ${selectText.textContent}
@@ -359,8 +371,7 @@ form.onsubmit = async (e) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       chat_id: CHAT_ID,
-      text: message,
-      parse_mode: "Markdown"
+      text: message
     })
   });
 
@@ -368,8 +379,9 @@ form.onsubmit = async (e) => {
   setTimeout(() => toast.classList.remove('show'), 3000);
   form.reset();
   selectText.textContent = 'Формат работы';
-}};
+};
 </script>
+
 
 </body>
 </html>
